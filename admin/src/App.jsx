@@ -9,12 +9,14 @@ import AdminDashboard from './pages/Admin/AdminDashboard';
 import AddAgent from './pages/Admin/AddAgent';
 import UploadFile from './pages/Admin/UploadFile';
 import AgentDashboard from './pages/Agent/AgentDashboard';
+import { AgentContext } from './context/AgentContext';
 
 const App = () => {
 
   const { aToken } = useContext(AdminContext)
+  const {uToken} = useContext(AgentContext)
 
-  return aToken ? (
+  return aToken || uToken ? (
     <div className='bg-[#f8f9fd]'>
       <ToastContainer />
       <Navbar />

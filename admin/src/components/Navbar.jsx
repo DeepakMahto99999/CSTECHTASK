@@ -26,7 +26,7 @@ const Navbar = () => {
                     alt="Logo"
                 />
                 <p className='border border-gray-300 px-3 py-1 rounded-full text-gray-700 font-medium bg-gray-50 shadow-sm'>
-                    {aToken ? 'Admin' : 'Agent'}
+                    {aToken ? 'Admin' : 'User'}
                 </p>
             </div>
 

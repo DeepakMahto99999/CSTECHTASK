@@ -325,4 +325,21 @@ Key Points:
 
 Empty JSX files allow for easy expansion
 
-Keeps project structure clean and modular
+Keeps project structure clean and modular 
+
+
+## created User Login 
+
+make and api for user logged in and integrated in frontend and navigate to /agent-dashboard  
+
+# Flow Summary
+
+Agent submits email + password.
+
+Backend validates credentials using bcrypt + JWT.
+
+Token is saved in localStorage (uToken).
+
+React AgentContext is updated with token.
+
+User is redirected to /agent-dashboard.

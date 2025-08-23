@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { AdminContext } from '../context/AdminContext'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { AgentContext } from '../context/AgentContext'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
 
@@ -11,6 +13,10 @@ const Login = () => {
     const [password, setPassword] = useState('')
 
     const { setAToken, backendUrl } = useContext(AdminContext)
+
+    const {setUToken } = useContext(AgentContext)
+
+    const navigate = useNavigate()
 
     const onSubmitHandler = async (e) => {
         e.preventDefault()
@@ -29,8 +35,15 @@ const Login = () => {
                 }
 
             } else {
-
-
+              const { data } = await axios.post(backendUrl + '/api/agent/login', { email, password })
+                if (data.success) {
+                    localStorage.setItem('uToken', data.token)
+                    setUToken(data.token)
+                    toast.success("Login successful")
+                    navigate('/agent-dashboard')
+                } else {
+                    toast.error(data.message)
+                }
             }
 
         } catch (error) {

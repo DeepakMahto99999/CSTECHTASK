@@ -3,6 +3,7 @@ import cors from 'cors'
 import 'dotenv/config'
 import connectDB from './config/mongodb.js'
 import adminRouter from './routes/adminRoute.js'
+import agentRouter from './routes/agentRoute.js'
 
 
 const app = express()
@@ -18,5 +19,6 @@ app.get('/', (req,res) => {
 }) 
 
 app.use('/api/admin',adminRouter)
+app.use('/api/agent',agentRouter)
 
 app.listen(port, () => console.log(`Server Started at http://localhost:${port}`));
