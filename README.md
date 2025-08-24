@@ -460,3 +460,37 @@ Returns success message + distributed data (mapping agent name → assigned rows
 5. Uses multer.memoryStorage for efficient file handling.
 
 5. Error handling with clear messages (empty file, wrong type, invalid row).
+
+
+
+
+## fetching the agent in Admin-Dashboard 
+
+# Frontend (Admin Dashboard)
+
+Updated AdminDashboard.jsx to:
+
+Call the new /api/admin/agents endpoint with JWT Authorization header.
+
+Display agent details (Name, Email, Mobile).
+
+Show a styled table of each agent’s assignedData (firstName, phone, notes).
+
+Modernized the UI using Tailwind CSS:
+
+Card layout for each agent
+
+Clean, responsive tables
+
+Hover effects & spacing for better readability 
+
+### Backend (Admin API)
+
+- Added new controller `getAgentsWithData` in **controllers/adminController.js**:
+  - Fetches **only 5 agents** at a time.
+  - Returns agent details (`name`, `email`, `mobile`) along with their `assignedData`.
+  - Handles error gracefully with proper status codes.
+
+- Added new route in **routes/adminRoutes.js**:
+  ```js
+  adminRouter.get('/agents', authAdmin, getAgentsWithData);

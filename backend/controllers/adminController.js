@@ -179,3 +179,13 @@ export const uploadList = async (req, res) => {
 };
 
 
+export const getAgentsWithData = async (req, res) => {
+  try {
+    // fetch only 5 agents
+    const agents = await agentModel.find().limit(5);
+    res.json({ success: true, agents });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+

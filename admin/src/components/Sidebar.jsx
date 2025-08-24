@@ -20,7 +20,7 @@ const Sidebar = () => {
 
                     <NavLink className={({isActive}) => `flex items-center gap-3 py-3.5 px-3 md:px-9  md:min-w-72 cursor-pointer ${isActive ? 'bg-[#f2f3ff] border-r-4 border-[#5f6fff] ' : ''} `} to={'/upload-file'} >
                         <img src={assets.appointment_icon} alt="" />
-                        <p>Upload Aggent</p>
+                        <p>Upload File</p>
                     </NavLink>
 
                     <NavLink className={({isActive}) => `flex items-center gap-3 py-3.5 px-3 md:px-9  md:min-w-72 cursor-pointer ${isActive ? 'bg-[#f2f3ff] border-r-4 border-[#5f6fff] ' : ''} `} to={'/add-agent'} >
