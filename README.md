@@ -493,4 +493,14 @@ Hover effects & spacing for better readability
 
 - Added new route in **routes/adminRoutes.js**:
   ```js
-  adminRouter.get('/agents', authAdmin, getAgentsWithData);
+  adminRouter.get('/agents', authAdmin, getAgentsWithData); 
+
+
+## Display data in each user 
+make AgentDashboard.jsx
+in this use can view their email , mobile number and their distrubuted data from Admin 
+
+## One api for take data from database 
+make one api for perticular user that take the data from database for that user only 
+
+# frontend and backend integration 
