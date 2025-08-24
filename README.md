@@ -342,4 +342,121 @@ Token is saved in localStorage (uToken).
 
 React AgentContext is updated with token.
 
-User is redirected to /agent-dashboard.
+User is redirected to /agent-dashboard. 
+
+
+
+## Upload File Feature (CSV/XLSX Upload & Distribution) 
+
+# Frontend Changes (UploadFile.jsx) 
+New Page: UploadFile.jsx under pages/
+
+Purpose: Allows admin to upload CSV/XLSX files containing customer lists (FirstName, Phone, Notes).
+
+Key Features:
+
+File input with validation for supported formats (.csv, .xlsx, .xls).
+
+Client-side validation:
+
+Required columns: FirstName, Phone, Notes.
+
+FirstName → must be text
+
+Phone → must be number
+
+Notes → must be text
+
+Preview of parsed rows before submission.
+
+Error messages shown for invalid files/rows.
+
+Submits valid file via axios to backend API (/api/admin/upload-list) with JWT token.
+
+Success/error feedback using React Toastify.
+
+UI:
+
+File input
+
+Preview table with scrollable view (max-h-64)
+
+Validation error messages
+
+Submit button disabled if no valid preview data 
+
+
+# Backend Changes (File Upload API) 
+New Middleware:
+
+middleware/upload.js
+
+Uses multer.memoryStorage() to store uploaded file in memory.
+
+Exports upload for use in routes.
+
+Updated Routes (adminRoute.js): 
+
+adminRouter.post(
+  '/upload-list',
+  authAdmin,
+  upload.single("file"),
+  uploadList
+)
+ 
+ New Controller Function (uploadList in adminController.js):
+
+Steps Performed:
+
+File Validation
+
+Ensures file is uploaded.
+
+Restricts file types to .csv, .xlsx, .xls.
+
+Parse & Read File
+
+Reads first sheet using xlsx.
+
+Converts to JSON rows.
+
+Header Validation
+
+Required columns: FirstName, Phone, Notes.
+
+Returns error if missing columns.
+
+Row Validation
+
+FirstName → string
+
+Phone → number
+
+Notes → string
+
+Agent Distribution Logic
+
+Fetches first 5 agents from database.
+
+Distributes rows evenly among agents.
+
+Each agent’s assignedData array updated with { firstName, phone, notes }.
+
+Response
+
+Returns success message + distributed data (mapping agent name → assigned rows).
+
+
+# Key Highlights of Upload Feature
+
+1. End-to-end file validation (frontend + backend).
+
+2.  Prevents invalid file uploads (wrong format, missing columns).
+
+3.  Preview before submit for better UX.
+
+4. Automatically distributes uploaded data evenly among exactly 5 agents.
+
+5. Uses multer.memoryStorage for efficient file handling.
+
+5. Error handling with clear messages (empty file, wrong type, invalid row).
